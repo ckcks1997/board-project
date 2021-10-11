@@ -1,0 +1,35 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+<h1>게시글 등록</h1>
+<div class="col-md-12">
+    <div class="col-md-4">
+        <form action="save" th:object="${postsDto}" method="post">
+            <div class="form-group">
+                <label for="title"> 제목 </label>
+                <input type="text"  class="form-control" th:field="*{title}" id="title" placeholder="입력.."   >
+            </div>
+            <div class="form-group">
+                <label for="author">작성자</label>
+                <input type="text" class="form-control" id="author"th:field="*{author}" placeholder="입력..">
+            </div>
+            <div class="form-group">
+                <label for="content">내용</label>
+                <textarea id="content"  class="form-control"th:field="*{content}" placeholder="입력.."></textarea>
+            </div>
+        <button class="btn btn-primary" id="submit" type="submit">등록</button>
+        <a href="/" class="btn btn-secondary" role="button"> 취소 </a>
+        </form>
+    </div>
+</div>
+</body>
+
+</html>
