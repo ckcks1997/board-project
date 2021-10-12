@@ -12,6 +12,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 
 @Controller
 @RequiredArgsConstructor
@@ -26,14 +29,21 @@ public class PostsController {
         return "postsform";
     }
 
-
-
     @PostMapping("/posts/save")
     public String savePosts(PostsDto postsDto){
         System.out.println("postsDto = " + postsDto);
         Posts posts = new Posts(postsDto.getTitle(), postsDto.getContent(), postsDto.getAuthor());
         postsRepository.save(posts);
-        return "redirect:/";
+        return "redirect:/posts/list";
+    }
+
+    @GetMapping("/posts/list")
+    public String showAllPosts(Model model){
+        List<PostsDto> allPosts = postsRepository.findAll().stream()
+                .map(data -> new PostsDto(data.getTitle(), data.getAuthor(), data.getContent()))
+                .collect(Collectors.toList());
+        model.addAttribute("allPosts", allPosts);
+        return "showposts";
     }
 
 }

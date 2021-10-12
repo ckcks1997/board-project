@@ -1,0 +1,40 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="header.html :: fragment-header"></div>
+    <title>전체글 목록</title>
+</head>
+
+<body>
+<div class="container py-4">
+    <h1>게시글 전체 목록</h1>
+    <div class="col-md-12">
+        <div class="col-md-6">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">제목</th>
+                    <th scope="col">작성자</th>
+                    <th scope="col">내용</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="data, idx : ${allPosts}">
+                    <td th:text="*{idx.index +1}">1</td>
+                    <td th:text="*{data.title}"></td>
+                    <td th:text="*{data.author}"></td>
+                    <td th:text="*{data.content}"></td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+        <a href="/posts/save" class="btn btn-primary btn-sm active" role="button">글 등록</a>
+    </div>
+</div>
+<div th:replace="footer.html :: fragment-footer"></div>
+</body>
+
+</html>
