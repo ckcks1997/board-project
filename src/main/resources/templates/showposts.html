@@ -23,7 +23,8 @@
                 <tbody>
                 <tr th:each="data, idx : ${allPosts}">
                     <td th:text="*{idx.index +1}">1</td>
-                    <td th:text="*{data.title}"></td>
+                    <!--TODO: 제목을 누르면 상세 내용 및 작성시간 보여주는 기능 추가   -->
+                    <td><a th:href="@{#}" href="#" th:text="*{data.title}"></a></td>
                     <td th:text="*{data.author}"></td>
                     <td th:text="*{data.content}"></td>
                 </tr>

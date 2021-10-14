@@ -13,22 +13,35 @@
             <form action="save" th:object="${postsDto}" method="post">
                 <div class="form-group">
                     <label for="title"> 제목 </label>
+                    <div class="alert alert-danger" th:errors="*{title}">
+                        제목을 입력하지 않을경우 나타나는 에러
+                    </div>
                     <input type="text"  class="form-control" th:field="*{title}" id="title" placeholder="제목.."   >
                 </div>
+                </br>
                 <div class="form-group">
                     <label for="author">작성자</label>
-                    <input type="text" class="form-control" id="author"th:field="*{author}" placeholder="작성자..">
+                    <div class="alert alert-danger" th:errors="*{author}">
+                        작성자를 입력하지 않을경우 나타나는 에러
+                    </div>
+                    <input type="text" class="form-control" id="author"th:field="*{author}"  placeholder="작성자..">
                 </div>
+                </br>
                 <div class="form-group">
                     <label for="content">내용</label>
-                    <textarea id="content"  class="form-control"th:field="*{content}" placeholder="입력.."></textarea>
+                    <div class="alert alert-danger" th:errors="*{content}">
+                        아무것도 입력하지 않을경우 나타나는 에러
+                    </div>
+                    <textarea id="content"  class="form-control"th:field="*{content}"  placeholder="입력.."></textarea>
                 </div>
+                </br>
             <button class="btn btn-primary" id="submit" type="submit">등록</button>
             <a href="/" class="btn btn-secondary" role="button"> 취소 </a>
             </form>
         </div>
     </div>
 </div>
+<div th:replace="footer.html :: fragment-footer"></div>
 </body>
 
 </html>
