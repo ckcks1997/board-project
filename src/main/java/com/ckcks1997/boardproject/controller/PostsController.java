@@ -4,6 +4,7 @@ package com.ckcks1997.boardproject.controller;
 import com.ckcks1997.boardproject.controller.dto.PostsDto;
 import com.ckcks1997.boardproject.domain.posts.Posts;
 import com.ckcks1997.boardproject.domain.posts.PostsRepository;
+import com.ckcks1997.boardproject.service.PostsService;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,7 @@ import java.util.stream.Collectors;
 public class PostsController {
 
     @Autowired
-    private PostsRepository postsRepository;
+    private PostsService postsService;
 
     @GetMapping("/posts/save")
     public String addPosts(Model model){
@@ -49,18 +50,22 @@ public class PostsController {
             return "/postsform";
         }
 
-        Posts posts = new Posts(postsDto.getTitle(), postsDto.getContent(), postsDto.getAuthor());
-        postsRepository.save(posts);
+        postsService.save(postsDto);
         return "redirect:/posts/list";
     }
 
     @GetMapping("/posts/list")
     public String showAllPosts(Model model){
-        List<PostsDto> allPosts = postsRepository.findAll().stream()
-                .map(data -> new PostsDto(data.getTitle(), data.getAuthor(), data.getContent()))
-                .collect(Collectors.toList());
+        List<PostsDto> allPosts = postsService.allPosts();
         model.addAttribute("allPosts", allPosts);
         return "showposts";
+    }
+
+
+    //TODO: 개별 글 조회 기능
+    @GetMapping("/posts/list/{id}")
+    public String showPost(){
+        return "post";
     }
 
 }

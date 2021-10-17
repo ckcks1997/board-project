@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor
 @Entity
-//TODO: 타임스템프 구현하기
+
 public class Posts extends BaseTime{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,16 +18,17 @@ public class Posts extends BaseTime{
     @Column(length = 500, nullable = false)
     private String title;
 
+    private String author;
+
     @Column(columnDefinition = "TEXT", nullable = false)
     private String content;
 
-    private String author;
 
     @Builder
-    public Posts(String title, String content, String author) {
+    public Posts(String title, String author, String content) {
         this.title = title;
-        this.content = content;
         this.author = author;
+        this.content = content;
     }
 
     public void update(String title, String content){
