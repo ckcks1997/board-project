@@ -9,30 +9,30 @@
 <div class="container py-4">
     <h1>게시글 전체 목록</h1>
     <div class="col-md-12">
-        <div class="col-md-6">
+        <div class="row">
             <table class="table">
                 <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">제목</th>
-                    <th scope="col">작성자</th>
-                    <th scope="col">내용</th>
+                <tr class="container">
+                    <th class="col">#</th>
+                    <th class="col-8">제목</th>
+                    <th class="col">작성자</th>
+<!--                    <th scope="col">내용</th>-->
                 </tr>
                 </thead>
 
                 <tbody>
                 <tr th:each="data, idx : ${allPosts}">
                     <td th:text="*{idx.index +1}">1</td>
-                    <!--TODO: 제목을 누르면 상세 내용 및 작성시간 보여주는 기능 추가   -->
-                    <td><a th:href="@{#}" href="#" th:text="*{data.title}"></a></td>
+                    <td><a style="text-decoration: none" th:href="@{/posts/list/{id}(id=${data.id})}" href="#" th:text="*{data.title}"></a></td>
                     <td th:text="*{data.author}"></td>
-                    <td th:text="*{data.content}"></td>
+<!--                    <td th:text="*{data.content}"></td>-->
                 </tr>
 
                 </tbody>
             </table>
         </div>
         <a href="/posts/save" class="btn btn-primary btn-sm active" role="button">글 등록</a>
+        <a href="/" class="btn btn-secondary btn-sm active" role="button">처음으로</a>
     </div>
 </div>
 <div th:replace="footer.html :: fragment-footer"></div>

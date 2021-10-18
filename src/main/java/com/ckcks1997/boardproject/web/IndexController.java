@@ -1,4 +1,4 @@
-package com.ckcks1997.boardproject.controller;
+package com.ckcks1997.boardproject.web;
 
 
 import org.springframework.stereotype.Controller;

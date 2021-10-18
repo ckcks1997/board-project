@@ -1,9 +1,7 @@
-package com.ckcks1997.boardproject.controller;
+package com.ckcks1997.boardproject.web;
 
 
-import com.ckcks1997.boardproject.controller.dto.PostsDto;
-import com.ckcks1997.boardproject.domain.posts.Posts;
-import com.ckcks1997.boardproject.domain.posts.PostsRepository;
+import com.ckcks1997.boardproject.web.dto.PostsDto;
 import com.ckcks1997.boardproject.service.PostsService;
 import lombok.RequiredArgsConstructor;
 
@@ -15,11 +13,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 
 @Controller
@@ -61,10 +58,10 @@ public class PostsController {
         return "showposts";
     }
 
-
-    //TODO: 개별 글 조회 기능
     @GetMapping("/posts/list/{id}")
-    public String showPost(){
+    public String showPost(@PathVariable("id") Long postId, Model model){
+        PostsDto data = postsService.findById(postId);
+        model.addAttribute("postsDto",data);
         return "post";
     }
 

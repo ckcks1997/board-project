@@ -1,12 +1,14 @@
 package com.ckcks1997.boardproject.service;
 
-import com.ckcks1997.boardproject.controller.dto.PostsDto;
+import com.ckcks1997.boardproject.domain.posts.Posts;
+import com.ckcks1997.boardproject.web.dto.PostsDto;
 import com.ckcks1997.boardproject.domain.posts.PostsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -22,8 +24,19 @@ public class PostsService {
     @Transactional
     public List<PostsDto> allPosts(){
         return postsRepository.findAll().stream()
-                .map(data -> new PostsDto(data.getTitle(), data.getAuthor(), data.getContent()))
+                .map(data -> new PostsDto(data.getId(), data.getTitle(), data.getAuthor(), data.getContent()))
                 .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public PostsDto findById(Long id){
+        Optional<Posts> data = postsRepository.findById(id);
+        if(data.isPresent()) {
+            Posts posts = data.get();
+            return new PostsDto(posts.getCreatedDate(), posts.getModifiedDate(),
+                    posts.getId(), posts.getTitle(), posts.getAuthor(), posts.getContent());
+        }
+        return new PostsDto();
     }
 
 }
