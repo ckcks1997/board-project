@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Service
 public class PostsService {
+
     private final PostsRepository postsRepository;
 
     @Transactional
@@ -37,6 +38,17 @@ public class PostsService {
                     posts.getId(), posts.getTitle(), posts.getAuthor(), posts.getContent());
         }
         return new PostsDto();
+    }
+
+    @Transactional
+    public String delete(Long id){
+        Optional<Posts> data = postsRepository.findById(id);
+        if(data.isEmpty()){
+            return "FAIL";
+        }else {
+            postsRepository.delete(data.get());
+            return "SUCCESS";
+        }
     }
 
 }

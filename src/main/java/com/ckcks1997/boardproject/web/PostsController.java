@@ -11,10 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -62,6 +59,15 @@ public class PostsController {
     public String showPost(@PathVariable("id") Long postId, Model model){
         PostsDto data = postsService.findById(postId);
         model.addAttribute("postsDto",data);
+        return "post";
+    }
+
+    
+    //TODO: 글 삭제기능 구현
+    @DeleteMapping("/posts/list/{id}")
+    public String deletePost(@PathVariable("id") Long postId){
+        String delete = postsService.delete(postId);
+        System.out.println("delete = " + delete);
         return "post";
     }
 
