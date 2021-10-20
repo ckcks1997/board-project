@@ -36,6 +36,9 @@
                     <textarea id="content"  class="form-control"th:field="*{content}"  placeholder="입력.."></textarea>
                 </div>
                 </br>
+                <input type="hidden"
+                       th:name="${_csrf.parameterName}"
+                       th:value="${_csrf.token}" />
             <button class="btn btn-primary" id="submit" type="submit">등록</button>
             <a href="/" class="btn btn-secondary" role="button"> 취소 </a>
             </form>
