@@ -11,7 +11,7 @@
     <h1>게시글 등록</h1>
     <div class="col-md-12">
         <div class="">
-            <form action="save" th:object="${postsDto}" method="post">
+            <form th:action="@{/posts/save}" th:object="${postsDto}" method="post">
                 <div class="form-group">
                     <label for="title"> 제목 </label>
                     <div class="alert alert-danger" th:errors="*{title}">

@@ -23,8 +23,6 @@ public class Posts extends BaseTime{
     @Column(columnDefinition = "TEXT", nullable = false)
     private String content;
 
-
-    @Builder
     public Posts(String title, String author, String content) {
         this.title = title;
         this.author = author;

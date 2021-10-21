@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -19,11 +20,15 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Slf4j
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    //TODO: user정보 db연동
+    @Autowired
+    private UserDetailsService userDetailsService;
+
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        String password = passwordEncoder().encode("1111");
-        auth.inMemoryAuthentication().withUser("user").password(password).roles("USER");
+//        String password = passwordEncoder().encode("1111");
+//        auth.inMemoryAuthentication().withUser("user").password(password).roles("USER");
+        auth.userDetailsService(userDetailsService);
     }
 
     @Bean
@@ -40,7 +45,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(final HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .anyRequest().authenticated()
+                .antMatchers("/posts/save").hasAnyRole("USER")
+                .anyRequest().permitAll()
                 .and()
                 .formLogin()
 //                .and()
