@@ -1,7 +1,7 @@
 package com.ckcks1997.boardproject.service;
 
 import com.ckcks1997.boardproject.domain.posts.Posts;
-import com.ckcks1997.boardproject.web.dto.PostsDto;
+import com.ckcks1997.boardproject.controller.dto.PostsDto;
 import com.ckcks1997.boardproject.domain.posts.PostsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

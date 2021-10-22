@@ -1,7 +1,7 @@
-package com.ckcks1997.boardproject.web;
+package com.ckcks1997.boardproject.controller;
 
 
-import com.ckcks1997.boardproject.web.dto.PostsDto;
+import com.ckcks1997.boardproject.controller.dto.PostsDto;
 import com.ckcks1997.boardproject.service.PostsService;
 import lombok.RequiredArgsConstructor;
 

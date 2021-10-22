@@ -1,5 +1,6 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <div th:replace="layout/header.html :: fragment-header"></div>
     <title>전체글 목록</title>
@@ -33,7 +34,7 @@
                 </tbody>
             </table>
         </div>
-        <a href="/posts/save" class="btn btn-primary btn-sm active" role="button">글 등록</a>
+        <a href="/posts/save" sec:authorize="isAuthenticated()" class="btn btn-primary btn-sm active" role="button">글 등록</a>
         <a href="/" class="btn btn-secondary btn-sm active" role="button">처음으로</a>
     </div>
 </div>

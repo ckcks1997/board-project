@@ -1,5 +1,6 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <div th:replace="layout/header.html :: fragment-header"></div>
     <title>첫 페이지</title>
@@ -8,10 +9,12 @@
 <body>
 <div th:replace="layout/navbar.html :: fragment-navbar"></div>
     <div class="container text-center px-3 py-4">
-        <h1>첫 페이지</h1>
-        <a href="/posts/save" class="btn btn-primary btn-lg active" role="button">글 등록</a>
+        <h1 >첫 페이지</h1>
+        <div sec:authorize="isAnonymous()">글 등록은 회원만 가능합니다.</div>
+        <div sec:authorize="isAuthenticated()">환영합니다.</div>
+        <br>
+        <a href="/posts/save" sec:authorize="isAuthenticated()" class="btn btn-primary btn-lg active" role="button">글 등록</a>
         <a href="/posts/list" class="btn btn-secondary btn-lg active" role="button">글 목록</a>
-        <a href="/register" class="btn btn-secondary btn-lg active" role="button">회원가입</a>
     </div>
     <div th:replace="layout/footer.html :: fragment-footer"></div>
 </body>

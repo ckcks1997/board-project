@@ -22,8 +22,7 @@ public class UserInfo {
 
     private String role;
 
-    public UserInfo(Long id, String userId, String nickname, String userPassword, String role) {
-        this.id = id;
+    public UserInfo(String userId, String nickname, String userPassword, String role) {
         this.userId = userId;
         this.nickname = nickname;
         this.userPassword = userPassword;

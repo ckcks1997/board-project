@@ -1,10 +1,9 @@
-package com.ckcks1997.boardproject.web.dto;
+package com.ckcks1997.boardproject.controller.dto;
 
 import com.ckcks1997.boardproject.domain.posts.Posts;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.LocalDateTime;
 
