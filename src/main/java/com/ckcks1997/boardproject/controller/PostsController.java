@@ -1,6 +1,7 @@
 package com.ckcks1997.boardproject.controller;
 
 
+import com.ckcks1997.boardproject.controller.dto.PageRequestDTO;
 import com.ckcks1997.boardproject.controller.dto.PostsDto;
 import com.ckcks1997.boardproject.service.PostsService;
 import lombok.RequiredArgsConstructor;
@@ -48,10 +49,20 @@ public class PostsController {
         return "redirect:/posts/list";
     }
 
-    @GetMapping("/posts/list")
-    public String showAllPosts(Model model){
-        List<PostsDto> allPosts = postsService.allPosts();
-        model.addAttribute("allPosts", allPosts);
+    // 디비에 있는 전체 게시글을 전부 긁어오게됨
+//    @GetMapping("/posts/list")
+//    public String showAllPosts(Model model){
+//        List<PostsDto> allPosts = postsService.allPosts();
+//        model.addAttribute("allPosts", allPosts);
+//        return "showposts";
+//    }
+
+    //위 코드를 대신함. 우선 글 번호 내림차순으로 10개만 가져옴..
+    @GetMapping("/posts/list") //전체 페이지 정보를 어떻게 넘기느냐가 문제ㅠㅠ..
+    public String mainPage(PageRequestDTO pageRequestDTO, Model model){
+        List<PostsDto> postsDtoList = postsService.getPostDtoListInPageRequestDTO(pageRequestDTO);
+
+        model.addAttribute("allPosts", postsDtoList);
         return "showposts";
     }
 

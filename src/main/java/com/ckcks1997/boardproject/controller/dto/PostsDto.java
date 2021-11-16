@@ -2,6 +2,7 @@ package com.ckcks1997.boardproject.controller.dto;
 
 import com.ckcks1997.boardproject.domain.posts.Posts;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,6 +11,7 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class PostsDto {
 
     private LocalDateTime createdDate;

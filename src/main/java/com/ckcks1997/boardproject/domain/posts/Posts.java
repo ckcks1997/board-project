@@ -7,7 +7,6 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor
 @Entity
-
 public class Posts extends BaseTime{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
