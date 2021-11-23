@@ -21,8 +21,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PostsController {
 
-    @Autowired
-    private PostsService postsService;
+
+    private final PostsService postsService;
 
     @GetMapping("/posts/save")
     public String addPosts(Model model){
@@ -66,20 +66,27 @@ public class PostsController {
         return "showposts";
     }
 
+    //TODO: 편집 구현
+    @GetMapping("/posts/edit")
+    public String editPage(Long id){
+        System.out.println(id);
+        return "edit";
+    }
+
     @GetMapping("/posts/list/{id}")
     public String showPost(@PathVariable("id") Long postId, Model model){
         PostsDto data = postsService.findById(postId);
         model.addAttribute("postsDto",data);
+
         return "post";
     }
 
-    
-    //TODO: 글 삭제기능 구현
-    @DeleteMapping("/posts/list/{id}")
-    public String deletePost(@PathVariable("id") Long postId){
-        String delete = postsService.delete(postId);
-        System.out.println("delete = " + delete);
-        return "post";
+    @PostMapping("/posts/delete")
+    public String deletePost(Long id){
+        String delete = postsService.delete(id);
+        System.out.println("deleted = " + delete);
+        System.out.println("delete = " + id);
+        return "redirect:/posts/list";
     }
 
 }
